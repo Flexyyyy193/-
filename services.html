@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши услуги | Техносервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Техносервис</h1>
+                <p>Профессиональный ремонт техники</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="services.html">Услуги</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Поиск услуг..." class="search-input">
+                <button id="search-btn" class="btn">Найти</button>
+            </div>
+            
+            <div class="sort-options">
+                <button class="sort-btn" data-sort="name" data-order="asc">Сортировать по названию (А-Я)</button>
+                <button class="sort-btn" data-sort="price" data-order="asc">Сортировать по цене (↑)</button>
+                <button class="sort-btn" data-sort="time" data-order="asc">Сортировать по сроку (быстрее)</button>
+            </div>
+            
+            <div class="services-grid" id="services-container">
+                <div class="service-card" data-name="Ремонт холодильников" data-price="3000" data-time="2">
+                    <h3>Ремонт холодильников</h3>
+                    <p>Устранение утечки фреона, замена компрессора, ремонт электроники.</p>
+                    <div class="service-meta">
+                        <span class="service-price">от 3000 руб.</span>
+                        <span class="service-time">2 дня</span>
+                    </div>
+                    <a href="contacts.html" class="btn">Заказать</a>
+                </div>
+                
+                <div class="service-card" data-name="Ремонт стиральных машин" data-price="2500" data-time="1">
+                    <h3>Ремонт стиральных машин</h3>
+                    <p>Замена подшипников, ремонт электронных модулей, устранение протечек.</p>
+                    <div class="service-meta">
+                        <span class="service-price">от 2500 руб.</span>
+                        <span class="service-time">1 день</span>
+                    </div>
+                    <a href="contacts.html" class="btn">Заказать</a>
+                </div>
+                
+                <div class="service-card" data-name="Ремонт телевизоров" data-price="4000" data-time="3">
+                    <h3>Ремонт телевизоров</h3>
+                    <p>Замена матрицы, ремонт блока питания, настройка программного обеспечения.</p>
+                    <div class="service-meta">
+                        <span class="service-price">от 4000 руб.</span>
+                        <span class="service-time">3 дня</span>
+                    </div>
+                    <a href="contacts.html" class="btn">Заказать</a>
+                </div>
+                
+                <div class="service-card" data-name="Ремонт посудомоечных машин" data-price="2800" data-time="2">
+                    <h3>Ремонт посудомоечных машин</h3>
+                    <p>Устранение засоров, замена насосов, ремонт электронных плат.</p>
+                    <div class="service-meta">
+                        <span class="service-price">от 2800 руб.</span>
+                        <span class="service-time">2 дня</span>
+                    </div>
+                    <a href="contacts.html" class="btn">Заказать</a>
+                </div>
+                
+                <div class="service-card" data-name="Ремонт микроволновых печей" data-price="1800" data-time="1">
+                    <h3>Ремонт микроволновых печей</h3>
+                    <p>Замена магнетрона, ремонт блока управления, замена слюдяной пластины.</p>
+                    <div class="service-meta">
+                        <span class="service-price">от 1800 руб.</span>
+                        <span class="service-time">1 день</span>
+                    </div>
+                    <a href="contacts.html" class="btn">Заказать</a>
+                </div>
+                
+                <div class="service-card" data-name="Ремонт кондиционеров" data-price="3500" data-time="2">
+                    <h3>Ремонт кондиционеров</h3>
+                    <p>Заправка фреоном, чистка внутреннего блока, ремонт компрессора.</p>
+                    <div class="service-meta">
+                        <span class="service-price">от 3500 руб.</span>
+                        <span class="service-time">2 дня</span>
+                    </div>
+                    <a href="contacts.html" class="btn">Заказать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Техносервис. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
