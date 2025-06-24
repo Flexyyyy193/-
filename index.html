@@ -3,81 +3,684 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Техносервис - ремонт техники любой сложности</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>О компании | Техносервис</title>
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #2c7be5;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(44, 123, 229, 0.2);
+        }
+        
+        .btn:hover {
+            background-color: #1a68d1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(44, 123, 229, 0.3);
+        }
+        
+        /* Стили для распределенных элементов навигации */
+        .page-header {
+            padding: 40px 0 20px;
+            background: linear-gradient(135deg, #f8f9fc 0%, #eef2f6 100%);
+            border-bottom: 1px solid #e0e6ed;
+        }
+        
+        .brand-corner {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        
+        .brand-corner h1 {
+            font-size: 24px;
+            color: #2c7be5;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .brand-corner p {
+            font-size: 13px;
+            color: #6e84a3;
+            margin: 3px 0 0;
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .floating-nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #4a5d7e;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .floating-nav a:hover {
+            background: #f0f4f9;
+            color: #2c7be5;
+        }
+        
+        .floating-nav a.active {
+            background: #2c7be5;
+            color: white;
+        }
+        
+        .content-nav {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .content-nav a {
+            padding: 8px 20px;
+            background: #f0f4f9;
+            color: #4a5d7e;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .content-nav a:hover {
+            background: #2c7be5;
+            color: white;
+        }
+        
+        /* Остальные стили страницы */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #222;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #2c7be5;
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            margin: 25px 0 15px;
+            color: #222;
+        }
+        
+        .about-text ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .about-text li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .about-text li::before {
+            content: '•';
+            color: #2c7be5;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+        
+        .about-image {
+            flex: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .team-member {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid #e6f0fd;
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-member h3 {
+            margin-bottom: 5px;
+            color: #222;
+        }
+        
+        .position {
+            color: #2c7be5;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .contacts {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .contacts a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contacts a:hover {
+            color: #2c7be5;
+        }
+        
+        .experience {
+            margin-bottom: 15px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Стили для раздела отзывов */
+        .reviews-section {
+            background-color: #f8fafd;
+            padding: 60px 0;
+            border-radius: 15px;
+            margin-bottom: 60px;
+        }
+        
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .review {
+            background-color: #fff;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .review:hover {
+            transform: translateY(-5px);
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .review-author {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .review-date {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .review-text {
+            color: #34495e;
+            line-height: 1.7;
+        }
+        
+        .review-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 40px auto 0;
+        }
+        
+        .review-form h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2c7be5;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .footer {
+            background-color: #0a0a1a;
+            color: #a0a8c0;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                margin-top: 30px;
+                width: 100%;
+            }
+            
+            .floating-nav {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px;
+            }
+            
+            .floating-nav a {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .brand-corner {
+                position: static;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .review-form {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1>Техносервис</h1>
-                <p>Профессиональный ремонт техники</p>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="services.html">Услуги</a></li>
-                    <li><a href="#">О нас</a></li>
-                    <li><a href="#">Контакты</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div class="brand-corner">
+        <h1>Техносервис</h1>
+        <p>Профессиональный ремонт техники</p>
+    </div>
 
-    <section class="slider">
-        <div class="slider-container">
-            <div class="slide active">
-                <div class="slide-content">
-                    <h2>Ремонт бытовой техники</h2>
-                    <p>Качественный ремонт холодильников, стиральных машин, плит и другой техники</p>
-                    <a href="services.html#contact-form" class="btn">Оставить заявку</a>
+    <nav class="floating-nav">
+        <a href="index.html">Главная</a>
+        <a href="services.html">Услуги</a>
+        <a href="about.html" class="active">О нас</a>
+        <a href="contacts.html">Контакты</a>
+    </nav>
+
+    <main class="container">
+        <section class="about-section">
+            <div class="content-nav">
+                <a href="index.html">Главная</a>
+                <a href="services.html">Наши услуги</a>
+                <a href="about.html">О компании</a>
+                <a href="contacts.html">Контакты</a>
+            </div>
+            
+            <h2 class="section-title">О нашей компании</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Компания "Техносервис" была основана в 2025 году и с тех пор мы являемся лидерами в сфере ремонта бытовой техники в регионе. Наша миссия - предоставлять качественные услуги по доступным ценам.</p>
+                    
+                    <h3>Наши преимущества:</h3>
+                    <ul>
+                        <li>Более 12 лет успешной работы на рынке</li>
+                        <li>Собственный склад оригинальных запчастей</li>
+                        <li>Сертифицированные специалисты с опытом от 5 лет</li>
+                        <li>Гарантия на все виды работ до 2 лет</li>
+                        <li>Бесплатный выезд мастера на диагностику</li>
+                    </ul>
+                    
+                    <p>Ежегодно мы обслуживаем более 5000 клиентов, а уровень удовлетворенности наших клиентов составляет 98%.</p>
+                    <a href="contacts.html" class="btn">Связаться с нами</a>
                 </div>
-                <div class="slide-image">
-                    <img src="https://avatars.mds.yandex.net/get-altay/5115998/2a0000018f51aba031b1cdc7cc3578f9920d/XXL_height" alt="Ремонт бытовой техники">
+                
+                <div class="about-image">
+                    <img src="https://avatars.mds.yandex.net/get-altay/4464784/2a0000017b1bcd5c0a9c5d2c1c9d0c8a7a2e/XXL_height" alt="Наша команда" loading="lazy">
                 </div>
             </div>
-        </div>
-        <div class="slider-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </section>
+        </section>
 
-    <section class="info-blocks">
-        <div class="container">
-            <div class="info-block">
-                <div class="info-icon">
-                    <img src="https://promotors.pro/wp-content/uploads/2017/08/garantee357x200.png" alt="Гарантия">
+        <section class="team-section">
+            <h2 class="section-title">Наша команда</h2>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://i.pinimg.com/originals/8f/69/2f/8f692f1a2d5f5a1a3e4f5e5d5e5e5e5e.jpg" alt="Чернослав Плотнодепнул" loading="lazy">
+                    </div>
+                    <h3>Чернослав Плотнодепнул</h3>
+                    <p class="position">Технический директор</p>
+                    <p class="contacts">Телефон: <a href="tel:+79123456789">+7 (912) 345-67-89</a></p>
+                    <p class="experience">Опыт работы: 2000 лет</p>
+                    <p>Специалист по сложным случаям ремонта холодильников и кондиционеров. Автор нескольких методик восстановления компрессоров.</p>
+                    <a href="contacts.html" class="btn">Написать</a>
                 </div>
-                <h3>Гарантия на работы</h3>
-                <p>Мы предоставляем гарантию до 2 лет на все выполненные работы и установленные запчасти.</p>
-            </div>
-
-            <div class="info-block">
-                <div class="info-icon">
-                    <img src="https://cdn1.youla.io/files/images/780_780/66/e1/66e10d3e5dd6096e0c0e6bc4-2.jpg" alt="Мастера">
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://i.pinimg.com/originals/5f/5e/3d/5f5e3d5e5e5e5e5e5e5e5e5e5e5e5e.jpg" alt="Япрода Лсемью" loading="lazy">
+                    </div>
+                    <h3>Япрода Лсемью</h3>
+                    <p class="position">Мастер по ремонту стиральных машин</p>
+                    <p class="contacts">Телефон: <a href="tel:+79129876543">+7 (912) 987-65-43</a></p>
+                    <p class="experience">Опыт работы: 1488 лет</p>
+                    <p>Специализируется на ремонте современных моделей стиральных машин с сенсорным управлением.</p>
+                    <a href="contacts.html" class="btn">Написать</a>
                 </div>
-                <h3>Опытные мастера</h3>
-                <p>Наши специалисты имеют более 5 лет опыта и регулярно повышают квалификацию.</p>
-            </div>
-
-            <div class="info-block">
-                <div class="info-icon">
-                    <img src="https://i.pinimg.com/originals/7c/2d/0a/7c2d0a5a8f4198f3ad73e73810cd839d.jpg" alt="Диагностика">
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://i.pinimg.com/originals/3d/5e/5f/3d5e5f5e5e5e5e5e5e5e5e5e5e5e5e.jpg" alt="Отец ВсияРуси" loading="lazy">
+                    </div>
+                    <h3>Отец ВсияРуси</h3>
+                    <p class="position">Мастер по ремонту телевизоров</p>
+                    <p class="contacts">Телефон: <a href="tel:+79121234567">+7 (912) 123-45-67</a></p>
+                    <p class="experience">Опыт работы: 1000-7 лет</p>
+                    <p>Эксперт по ремонту LED и OLED телевизоров, восстановлению матриц и замене подсветки.</p>
+                    <a href="contacts.html" class="btn">Написать</a>
                 </div>
-                <h3>Бесплатная диагностика</h3>
-                <p>Первичная диагностика неисправности проводится бесплатно при последующем ремонте.</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="map-placeholder"></div>
+        <section class="reviews-section">
+            <h2 class="section-title">Отзывы наших клиентов</h2>
+            
+            <div class="reviews-container" id="reviewsContainer">
+            </div>
+            
+            <div class="review-form">
+                <h3>Оставьте свой отзыв</h3>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewName">Погоняло:</label>
+                        <input type="text" id="reviewName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Ваше мнение (очень важно):</label>
+                        <textarea id="reviewText" name="review" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить отзыв</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
             <p>© 2025 Техносервис. Все права защищены.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewForm = document.getElementById('reviewForm');
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            
+            function loadReviews() {
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                reviewsContainer.innerHTML = '';
+                
+                if (reviews.length === 0) {
+                    reviewsContainer.innerHTML = '<p style="text-align: center; color: #7f8c8d;">Пока нет отзывов. Будьте первым!</p>';
+                    return;
+                }
+                
+                reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review';
+                    reviewElement.innerHTML = `
+                        <div class="review-header">
+                            <span class="review-author">${review.name}</span>
+                            <span class="review-date">${new Date(review.date).toLocaleDateString('ru-RU')}</span>
+                        </div>
+                        <div class="review-text">${review.text}</div>
+                    `;
+                    reviewsContainer.appendChild(reviewElement);
+                });
+            }
+            
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('reviewName').value.trim();
+                const text = document.getElementById('reviewText').value.trim();
+                
+                if (!name || !text) {
+                    alert('Не жульничай, заполни все поля');
+                    return;
+                }
+                
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                
+                reviews.push({
+                    name: name,
+                    text: text,
+                    date: new Date().toISOString()
+                });
+                
+                localStorage.setItem('reviews', JSON.stringify(reviews));
+                
+                loadReviews();
+                
+                reviewForm.reset();
+                alert('Спасибо за отзыв!(удалим его спустя 10 минут)');
+            });
+            
+            loadReviews();
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | Техносервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="brand-corner">
+        <h1>Техносервис</h1>
+        <p>Профессиональный ремонт техники</p>
+    </div>
+
+    <nav class="floating-nav">
+        <a href="index.html">Главная</a>
+        <a href="services.html">Услуги</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html" class="active">Контакты</a>
+    </nav>
+
+    <main class="container">
+        <section class="contact-page">
+            <h2 class="section-title">Свяжитесь с нами</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    <div class="info-item">
+                        <h4>Адрес:</h4>
+                        <p>г. Москва, ул. Техническая, д. 42, офис 101</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Телефон:</h4>
+                        <p><a href="tel:+79997767066">+7 (495) 123-45-67</a></p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Email:</h4>
+                        <p><a href="mailto:info@technoservice.ru">info@technoservice.ru</a></p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Режим работы:</h4>
+                        <p>Пн-Пт: 9:00 - 20:00<br>Сб-Вс: 10:00 - 18:00</p>
+                    </div>
+                    
+                    <div class="social-links">
+                        <h4>Мы в соцсетях:</h4>
+                        <div class="social-icons">
+                            <a href="https://vk.com/technoservice" class="social-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/145/145813.png" alt="VK">
+                            </a>
+                            <a href="https://t.me/technoservice" class="social-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+                            </a>
+                            <a href="https://wa.me/79123456789" class="social-link">
+                                <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="WhatsApp">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Форма обратной связи</h3>
+                    <form id="feedback-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя:</label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="error-message" id="name-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение:</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <div class="error-message" id="message-error"></div>
+                        </div>
+                        <button type="submit" class="btn">Отправить сообщение в никуда</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <h3>Мы на карте</h3>
+                <img src="https://static-maps.yandex.ru/1.x/?lang=ru_RU&ll=37.617635,55.755814&size=650,400&z=15&l=map&pt=37.617635,55.755814,pm2blm" alt="Карта с нашим местоположением" class="static-map">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Техносервис. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
