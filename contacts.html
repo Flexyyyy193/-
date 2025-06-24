@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | Техносервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Техносервис</h1>
+                <p>Профессиональный ремонт техники</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="services.html">Услуги</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-page">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь с нами</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    <div class="info-item">
+                        <h4>Адрес:</h4>
+                        <p>г. Москва, ул. Техническая, д. 42, офис 101</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Телефон:</h4>
+                        <p><a href="tel:+79997767066">+7 (495) 123-45-67</a></p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Email:</h4>
+                        <p><a href="mailto:info@technoservice.ru">info@technoservice.ru</a></p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Режим работы:</h4>
+                        <p>Пн-Пт: 9:00 - 20:00<br>Сб-Вс: 10:00 - 18:00</p>
+                    </div>
+                    
+                    <div class="social-links">
+                        <h4>Мы в соцсетях:</h4>
+                        <div class="social-icons">
+                            <a href="https://t.me/+-NjFsKEwGgE2MmQy" target="_blank" rel="noopener noreferrer">
+                                <img src="https://cdn-icons-png.flaticon.com/512/145/145813.png" alt="VK" width="40">
+                            </a>
+                            <a href="https://t.me/+-NjFsKEwGgE2MmQy" target="_blank" rel="noopener noreferrer">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" width="40">
+                            </a>
+                            <a href="https://wa.m/79123456789" target="_blank" rel="noopener noreferrer">
+                                <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="WhatsApp" width="40">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Форма обратной связи</h3>
+                    <form id="feedback-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение:</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <h3>Мы на карте</h3>
+                <img src="https://static-maps.yandex.ru/1.x/?lang=ru_RU&ll=37.617635,55.755814&size=650,400&z=15&l=map&pt=37.617635,55.755814,pm2blm" alt="Карта с нашим местоположением" class="static-map">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Техносервис. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('feedback-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

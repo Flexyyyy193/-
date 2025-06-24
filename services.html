@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши услуги | Техносервис</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 5px;
+        }
+        
+        .page-btn {
+            padding: 8px 12px;
+            background-color: #f0f4f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .page-btn.active {
+            background-color: #2c7be5;
+            color: white;
+            border-color: #2c7be5;
+        }
+        
+        .page-btn:hover:not(.active) {
+            background-color: #e0e8f0;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+        }
+        
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #666;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Техносервис</h1>
+                <p>Профессиональный ремонт техники</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="services.html">Услуги</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Поиск услуг..." class="search-input">
+                <button id="search-btn" class="btn">Найти</button>
+            </div>
+            
+            <div class="sort-options">
+                <button class="sort-btn" data-sort="name" data-order="asc">Сортировать по названию (А-Я)</button>
+                <button class="sort-btn" data-sort="price" data-order="asc">Сортировать по цене (↑)</button>
+                <button class="sort-btn" data-sort="time" data-order="asc">Сортировать по сроку (быстрее)</button>
+            </div>
+            
+            <div class="services-grid" id="services-container">
+            </div>
+            
+            <div class="page-info" id="page-info"></div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Техносервис. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const services = [
+                {
+                    name: "Ремонт холодильников",
+                    description: "Устранение утечки фреона, замена компрессора, ремонт электроники.",
+                    price: 3000,
+                    time: 2
+                },
+                {
+                    name: "Ремонт стиральных машин",
+                    description: "Замена подшипников, ремонт электронных модулей, устранение протечек.",
+                    price: 2500,
+                    time: 1
+                },
+                {
+                    name: "Ремонт телевизоров",
+                    description: "Замена матрицы, ремонт блока питания, настройка программного обеспечения.",
+                    price: 4000,
+                    time: 3
+                },
+                {
+                    name: "Ремонт посудомоечных машин",
+                    description: "Устранение засоров, замена насосов, ремонт электронных плат.",
+                    price: 2800,
+                    time: 2
+                },
+                {
+                    name: "Ремонт микроволновых печей",
+                    description: "Замена магнетрона, ремонт блока управления, замена слюдяной пластины.",
+                    price: 1800,
+                    time: 1
+                },
+                {
+                    name: "Ремонт кондиционеров",
+                    description: "Заправка фреоном, чистка внутреннего блока, ремонт компрессора.",
+                    price: 3500,
+                    time: 2
+                },
+                {
+                    name: "Ремонт духовых шкафов",
+                    description: "Замена нагревательных элементов, ремонт электроники, регулировка температуры.",
+                    price: 3200,
+                    time: 2
+                },
+                {
+                    name: "Ремонт варочных панелей",
+                    description: "Замена сенсорных панелей, ремонт конфорок, настройка датчиков.",
+                    price: 2900,
+                    time: 1
+                },
+                {
+                    name: "Ремонт кофемашин",
+                    description: "Чистка системы, замена помп, ремонт электронных компонентов.",
+                    price: 2700,
+                    time: 1
+                },
+                {
+                    name: "Ремонт пылесосов",
+                    description: "Замена двигателей, ремонт фильтров, устранение засоров.",
+                    price: 2200,
+                    time: 1
+                },
+                {
+                    name: "Ремонт мультиварок",
+                    description: "Замена нагревательных элементов, ремонт электронных плат, настройка программ.",
+                    price: 2100,
+                    time: 1
+                },
+                {
+                    name: "Ремонт блендеров",
+                    description: "Замена двигателей, ремонт кнопок, замена ножей.",
+                    price: 1900,
+                    time: 1
+                }
+            ];
+
+            const servicesContainer = document.getElementById('services-container');
+            const searchInput = document.getElementById('search-input');
+            const searchBtn = document.getElementById('search-btn');
+            const sortButtons = document.querySelectorAll('.sort-btn');
+            const pageInfo = document.getElementById('page-info');
+            const pagination = document.getElementById('pagination');
+
+            const itemsPerPage = 6;
+            let currentPage = 1;
+            let filteredServices = [...services];
+            let sortConfig = { key: 'name', order: 'asc' };
+
+            renderServices();
+            renderPagination();
+
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const sortKey = this.dataset.sort;
+                    const sortOrder = this.dataset.order;
+                    
+                    if (sortConfig.key === sortKey) {
+                        sortConfig.order = sortConfig.order === 'asc' ? 'desc' : 'asc';
+                        this.dataset.order = sortConfig.order;
+                        
+                        if (sortKey === 'name') {
+                            this.textContent = `Сортировать по названию (${sortConfig.order === 'asc' ? 'А-Я' : 'Я-А'})`;
+                        } else if (sortKey === 'price') {
+                            this.textContent = `Сортировать по цене (${sortConfig.order === 'asc' ? '↑' : '↓'})`;
+                        } else if (sortKey === 'time') {
+                            this.textContent = `Сортировать по сроку (${sortConfig.order === 'asc' ? 'быстрее' : 'дольше'})`;
+                        }
+                    } else {
+                        sortConfig = { key: sortKey, order: sortOrder };
+                        
+                        sortButtons.forEach(btn => {
+                            if (btn !== this) {
+                                btn.dataset.order = 'asc';
+                                if (btn.dataset.sort === 'name') btn.textContent = 'Сортировать по названию (А-Я)';
+                                else if (btn.dataset.sort === 'price') btn.textContent = 'Сортировать по цене (↑)';
+                                else if (btn.dataset.sort === 'time') btn.textContent = 'Сортировать по сроку (быстрее)';
+                            }
+                        });
+                    }
+                    
+                    currentPage = 1;
+                    renderServices();
+                    renderPagination();
+                });
+            });
+
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                filteredServices = services.filter(service => 
+                    service.name.toLowerCase().includes(searchTerm) || 
+                    service.description.toLowerCase().includes(searchTerm)
+                );
+                currentPage = 1;
+                renderServices();
+                renderPagination();
+            }
+
+            function sortServices() {
+                filteredServices.sort((a, b) => {
+                    let compareResult;
+                    
+                    if (sortConfig.key === 'name') {
+                        compareResult = a.name.localeCompare(b.name);
+                    } else {
+                        compareResult = a[sortConfig.key] - b[sortConfig.key];
+                    }
+                    
+                    return sortConfig.order === 'asc' ? compareResult : -compareResult;
+                });
+            }
+
+            function renderServices() {
+                sortServices();
+                
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedServices = filteredServices.slice(startIndex, endIndex);
+                
+                servicesContainer.innerHTML = '';
+                
+                if (paginatedServices.length === 0) {
+                    servicesContainer.innerHTML = '<div class="no-results">Ничего не найдено. Попробуйте изменить параметры поиска.</div>';
+                    return;
+                }
+                
+                paginatedServices.forEach(service => {
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'service-card';
+                    serviceCard.dataset.name = service.name;
+                    serviceCard.dataset.price = service.price;
+                    serviceCard.dataset.time = service.time;
+                    
+                    serviceCard.innerHTML = `
+                        <h3>${service.name}</h3>
+                        <p>${service.description}</p>
+                        <div class="service-meta">
+                            <span class="service-price">от ${service.price} руб.</span>
+                            <span class="service-time">${service.time} ${getDayText(service.time)}</span>
+                        </div>
+                        <a href="contacts.html" class="btn">Заказать</a>
+                    `;
+                    
+                    servicesContainer.appendChild(serviceCard);
+                });
+                
+                updatePageInfo();
+            }
+
+            function getDayText(days) {
+                if (days % 10 === 1 && days % 100 !== 11) return 'день';
+                if ([2, 3, 4].includes(days % 10) && ![12, 13, 14].includes(days % 100)) return 'дня';
+                return 'дней';
+            }
+
+            function renderPagination() {
+                const totalPages = Math.ceil(filteredServices.length / itemsPerPage);
+                
+                pagination.innerHTML = '';
+                
+                if (totalPages <= 1) return;
+                
+                if (currentPage > 1) {
+                    const prevBtn = document.createElement('button');
+                    prevBtn.className = 'page-btn';
+                    prevBtn.innerHTML = '&laquo;';
+                    prevBtn.addEventListener('click', () => {
+                        currentPage--;
+                        renderServices();
+                        renderPagination();
+                    });
+                    pagination.appendChild(prevBtn);
+                }
+                
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                    pageBtn.textContent = i;
+                    pageBtn.addEventListener('click', () => {
+                        currentPage = i;
+                        renderServices();
+                        renderPagination();
+                    });
+                    pagination.appendChild(pageBtn);
+                }
+                
+                if (currentPage < totalPages) {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.className = 'page-btn';
+                    nextBtn.innerHTML = '&raquo;';
+                    nextBtn.addEventListener('click', () => {
+                        currentPage++;
+                        renderServices();
+                        renderPagination();
+                    });
+                    pagination.appendChild(nextBtn);
+                }
+            }
+
+            function updatePageInfo() {
+                const totalItems = filteredServices.length;
+                const startItem = (currentPage - 1) * itemsPerPage + 1;
+                const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+                
+                if (totalItems === 0) {
+                    pageInfo.textContent = 'Нет услуг для отображения';
+                } else {
+                    pageInfo.textContent = `Показано ${startItem}-${endItem} из ${totalItems} услуг`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
